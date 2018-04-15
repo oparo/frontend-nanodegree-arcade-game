@@ -1,11 +1,17 @@
+const Movex = 101;
+const Movey = 83;
+
 // Enemies our player must avoid
-var Enemy = function() {
+var Enemy = function(bugX,bugY) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    this.x = bugX;
+    this.y = bugY;
+
 };
 
 // Update the enemy's position, required method for game
@@ -14,6 +20,20 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    if (this.x < 550) {
+      this.x = this.x + Movex * dt;
+    } else {
+      this.x = -120;
+    }
+
+    // Check for collissions
+    if (this.y == player.y)
+    {
+      println("Boom...");
+    //  Player.reset();
+    //  this.x = 195;
+    //  this.y = 350;
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -24,11 +44,48 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+var Player = function () {
 
+    this.sprite = 'images/char-boy.png';
+    this.reset();
+    //this.x = 195;
+    //this.y = 350;
+};
 
-// Now instantiate your objects.
+Player.prototype.update = function(dt){
+
+};
+
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+Player.prototype.handleInput = function (stroke) {
+
+    if (stroke == 'left' && this.x > 0) {
+      this.x = this.x - Movex
+    } else if (stroke == 'right' && this.x < 350) {
+      this.x = this.x + Movex
+    } else if (stroke == 'up' && this.y > 50) {
+      this.y = this.y - Movey
+    } else if (stroke == 'down' && this.y < 350) {
+      this.y = this.y + Movey
+    } else if (stroke == 'up' && this.y < 30) {
+      this.y = 350
+    }
+};
+
+Player.prototype.reset = function() {
+  this.x = 195;
+  this.y = 350;
+}
+
+// Now instantiate your  objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+
+var allEnemies = [new Enemy(-100,65), new Enemy(-225,145), new Enemy(-300,230)];
+var player = new Player();
 
 
 
