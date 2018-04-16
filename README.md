@@ -5,9 +5,9 @@ his recipe for **cereal and milk** has been passed down my family for months.
 
 ## Installation
 
-* Cereal (you can find cool cereals
-  [here](www.example.com/coolcereals))
-* Milk
+* You can play the game by clicking  
+  [here](https://oparo.github.io/frontend-nanodegree-arcade-game/))
+* Download the html from my Github
 
 ## Directions
 
