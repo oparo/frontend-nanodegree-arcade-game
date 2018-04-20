@@ -68,9 +68,20 @@ Player.prototype.handleInput = function (stroke) {
     } else if (stroke == 'down' && this.y < 350) {
       this.y = this.y + Movey
     } else if (stroke == 'up') {
-      this.reset();
+      //this.reset();
+      //console.log('You Win!!!!');
+      //alert("You Win!!!");
+
+      var result = prompt("You have safely crossed the enemies", "You Win!!!");
+      console.log (result);
+      console.log(this.x, this.y);
+        if (result != null || result != "") {
+          this.reset();
+        }
+        else {
+          this.y = 45;
+        }
     }
-    //console.log(this.x, this.y);
 
 };
 
@@ -83,7 +94,7 @@ Player.prototype.reset = function() {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-var allEnemies = [new Enemy(-100,65,4), new Enemy(425,148,-2), new Enemy(-300,231,3)];
+var allEnemies = [new Enemy(-100,65,5), new Enemy(425,148,-2), new Enemy(-300,231,3)];
 var player = new Player();
 
 
