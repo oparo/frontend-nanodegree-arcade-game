@@ -20,7 +20,7 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x = this.x + Movex * dt * this.dir;
+    this.x += Movex * dt * this.dir;
     if (this.x > 550) {
       this.x = -120;
     } else if (this.x < -120){
@@ -31,6 +31,7 @@ Enemy.prototype.update = function(dt) {
     if (this.y == player.y && Math.abs(this.x - player.x) < 70 )
     {
       console.log("Boom...");
+      alert("You got hit by a bug. Game will reset. Try again");
       player.reset();
     }
 };
@@ -55,46 +56,38 @@ Player.prototype.update = function(dt){
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    if (this.y <= 0) {
+      alert ("Congratulations. You Win!!!");
+      this.reset();
+    }
 };
 
 Player.prototype.handleInput = function (stroke) {
 
     if (stroke == 'left' && this.x > 0) {
-      this.x = this.x - Movex
+      this.x -=  Movex
     } else if (stroke == 'right' && this.x < 350) {
-      this.x = this.x + Movex
-    } else if (stroke == 'up' && this.y > 65) {
-      this.y = this.y - Movey
+      this.x +=  Movex
+    } else if (stroke == 'up' && this.y > 0) {
+      this.y -= Movey
+      console.log (this.x, this.y);
     } else if (stroke == 'down' && this.y < 350) {
-      this.y = this.y + Movey
-    } else if (stroke == 'up') {
-      //this.reset();
-      //console.log('You Win!!!!');
+      this.y += Movey
+    } /*else if (stroke == 'up') {
       //alert("You Win!!!");
-
-      var result = prompt("You have safely crossed the enemies", "You Win!!!");
-      console.log (result);
-      console.log(this.x, this.y);
-        if (result != null || result != "") {
-          this.reset();
-        }
-        else {
-          this.y = 45;
-        }
-    }
-
+    }*/
 };
 
 Player.prototype.reset = function() {
     this.x = 195;
-    this.y = 314;
+    this.y = 401;//314
 }
 
 // Now instantiate your  objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-var allEnemies = [new Enemy(-100,65,5), new Enemy(425,148,-2), new Enemy(-300,231,3)];
+var allEnemies = [new Enemy(-100,69,5), new Enemy(425,152,-2), new Enemy(-300,235,3)];
 var player = new Player();
 
 
